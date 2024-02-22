@@ -7,8 +7,8 @@ TODO:
 - [ ] 1. Introduction
   - [x] 1.1 Purpose
   - [x] 1.2 Document Conventions 
-  - [ ] 1.3 Intended Audience and Reading Suggestions (ruben)
-  - [ ] 1.4 Project Scope (ruben)
+  - [x] 1.3 Intended Audience and Reading Suggestions (ruben)
+  - [x] 1.4 Project Scope (ruben)
   - [ ] 1.5 References (josue)
 - [ ] 4. External Interface Requirements
   - [ ] 4.1 User Interfaces
