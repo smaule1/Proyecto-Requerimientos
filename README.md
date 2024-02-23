@@ -12,9 +12,9 @@ TODO:
   - [ ] 1.5 References (josue)
 - [ ] 4. External Interface Requirements
   - [ ] 4.1 User Interfaces
-    - [ ] Imagen de GUI (ale)
+    - [x] Imagen de GUI (ale)
     - [ ] Descripcion de GUI 
-  - [ ] 4.2 Hardware Interfaces
-  - [ ] 4.3 Software Interfaces
+  - [x] 4.2 Hardware Interfaces
+  - [x] 4.3 Software Interfaces
   - [x] 4.4 Comunications Interfaces
   
