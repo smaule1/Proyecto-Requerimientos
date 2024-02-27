@@ -20,3 +20,9 @@ TODO:
   - [x] 4.3 Software Interfaces
   - [x] 4.4 Comunications Interfaces
 - [ ] Prototipo Interfaz
+  - [ ] Poner una fuente buena
+  - [ ] Botones
+  - [ ] Panel Elevador
+    - [ ] Personas
+    - [ ] El Elevador
+  - [ ] Definir Colores 
