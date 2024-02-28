@@ -48,8 +48,7 @@ body{
     text-align: center;      
 }
 
-
-  .buttonRound{
+.button {
     position: relative;
     border: none;
     background: transparent;
@@ -59,100 +58,9 @@ body{
     transition: filter 250ms;
     user-select: none;
     touch-action: manipulation;
-   }
+}
    
-   .shadowRound {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 200px;
-    background: hsl(0deg 0% 0% / 0.25);
-    will-change: transform;
-    transform: translateY(2px);
-    transition: transform
-       600ms
-       cubic-bezier(.3, .7, .4, 1);
-   }
-   
-   .edgeRound {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 200px;
-    background: linear-gradient(
-       to left,
-       hsl(0, 0%, 0%) 0%,
-       hsl(0, 0%, 0%) 8%,
-       hsl(340, 13%, 23%) 92%,
-       hsl(340, 3%, 23%) 100%
-     );
-   }
-   
-   .frontRound {
-    display: block;
-    position: relative;
-    padding: 12px 27px;
-    border: #000000 solid 2px;
-    border-radius: 2000px;
-    font-size: 1.1rem;
-    color: rgb(0, 0, 0);
-    background: #e8e8e8;
-    will-change: transform;
-    transform: translateY(-4px);
-    transition: transform
-       600ms
-       cubic-bezier(.3, .7, .4, 1);
-   }
-   
-   .buttonRound:hover {
-    filter: brightness(110%);
-   }
-   
-   .buttonRound:hover .frontRound {
-    transform: translateY(-6px);
-    transition: transform
-       250ms
-       cubic-bezier(.3, .7, .4, 1.5);
-   }
-   
-   .buttonRound:active .frontRound {
-    transform: translateY(-2px);
-    transition: transform 34ms;
-   }
-   
-   .buttonRound:hover .shadowRound {
-    transform: translateY(4px);
-    transition: transform
-       250ms
-       cubic-bezier(.3, .7, .4, 1.5);
-   }
-   
-   .buttonRound:active .shadowRound {
-    transform: translateY(1px);
-    transition: transform 34ms;
-   }
-   
-   .buttonRound:focus:not(:focus-visible) {
-    outline: none;
-   }
-
-   .button5 {
-    position: relative;
-    border: none;
-    background: transparent;
-    padding: 0;
-    cursor: pointer;
-    outline-offset: 4px;
-    transition: filter 250ms;
-    user-select: none;
-    touch-action: manipulation;
-   }
-   
-   .shadow {
+.shadow {
     position: absolute;
     top: 0;
     left: 0;
@@ -165,9 +73,9 @@ body{
     transition: transform
        600ms
        cubic-bezier(.3, .7, .4, 1);
-   }
+}
    
-   .edge {
+.edge {
     position: absolute;
     top: 0;
     left: 0;
@@ -181,9 +89,9 @@ body{
        hsl(340deg 100% 32%) 92%,
        hsl(340deg 100% 16%) 100%
      );
-   }
+}
    
-   .front {
+.front {
     display: block;
     position: relative;
     padding: 12px 27px;
@@ -196,36 +104,63 @@ body{
     transition: transform
        600ms
        cubic-bezier(.3, .7, .4, 1);
-   }
+}
    
-   .button5:hover {
+.button:hover {
     filter: brightness(110%);
-   }
+}
    
-   .button5:hover .front {
+.button:hover .front {
     transform: translateY(-6px);
     transition: transform
        250ms
        cubic-bezier(.3, .7, .4, 1.5);
-   }
+}
    
-   .button5:active .front {
+.button:active .front {
     transform: translateY(-2px);
     transition: transform 34ms;
-   }
+}
    
-   .button5:hover .shadow {
+.button:hover .shadow {
     transform: translateY(4px);
     transition: transform
        250ms
        cubic-bezier(.3, .7, .4, 1.5);
-   }
+}
    
-   .button5:active .shadow {
+.button:active .shadow {
     transform: translateY(1px);
     transition: transform 34ms;
-   }
+}
    
-   .button5:focus:not(:focus-visible) {
+.button:focus:not(:focus-visible) {
     outline: none;
-   }
+}
+   
+.shadow-round {
+    border-radius: 200px;
+    background: hsl(0deg 0% 0% / 0.25);
+}
+   
+.edge-round {
+    border-radius: 200px;
+    background: linear-gradient(
+       to left,
+       hsl(0, 0%, 0%) 0%,
+       hsl(0, 0%, 0%) 8%,
+       hsl(340, 13%, 23%) 92%,
+       hsl(340, 3%, 23%) 100%
+     );
+}
+
+.front-round {
+    border: #000000 solid 0px;
+    border-radius: 2000px;
+    font-size: 1.1rem;
+    color: rgb(0, 0, 0);
+    background: #e8e8e8;
+}
+   
+
+   
