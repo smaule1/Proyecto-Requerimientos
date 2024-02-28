@@ -29,7 +29,7 @@ body{
 }
 
 #PrimaryPanel{
-    background-color: rgb(204, 192, 192);
+    background-color: #ccc;
     justify-content: space-between;
 }
 
@@ -47,6 +47,8 @@ body{
     width: 100%;
     text-align: center;      
 }
+
+/* Taken from https://uiverse.io/cssbuttons-io/evil-monkey-41 */
 
 .button {
     position: relative;
@@ -159,7 +161,16 @@ body{
     border-radius: 2000px;
     font-size: 1.1rem;
     color: rgb(0, 0, 0);
-    background: #e8e8e8;
+    background: linear-gradient(
+        45deg,
+        #999 5%,
+        #fff 10%,
+        #ccc 30%,
+        #ddd 50%,
+        #ccc 70%,
+        #fff 80%,
+        #999 95%
+    );
 }
    
 
