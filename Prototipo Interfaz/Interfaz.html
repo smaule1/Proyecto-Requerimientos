@@ -10,10 +10,15 @@
         <link rel="stylesheet" href="stylesheet.css">
     </head>
     <body>
-        
-        <div id="ElevatorContainer">elevador</div>
+        <div id="ElevatorContainer">
+            <div class="elevador">
+                <div id="puerta_elev_izq" class="puerta puerta-izq"></div>
+                <div id="puerta_elev_der" class="puerta puerta-der"></div>
+                <div id="base_elev_izq" class="base base-izq"></div>
+                <div id="base_elev_der" class="base base-der"></div>
+            </div>
+        </div>
         <div id="SecondaryPanel" class="Panel">
-                
             <button>⭡</button>
             <button>⭣</button>
             <button>+</button>
@@ -21,21 +26,16 @@
             <button>SOS</button>
         </div>
         <div id="PrimaryPanel" class="Panel">
-
-            <Header class="piso">2^</Header>
-            <button>4</button>
-            <button>3</button>
-            <button>2</button>
-            <button>1</button>
-            <button>SOS</button>
-            <button><></button>
-            <button>><</button>                
-            
-
+            <Header id="hd_elev_screen" class="piso">P3</Header>
+            <button id="btn_elev_4">4</button>
+            <button id="btn_elev_3">3</button>
+            <button id="btn_elev_2">2</button>
+            <button id="btn_elev_1">1</button>
+            <button id="btn_elev_sos">SOS</button>
+            <button id="btn_elev_abrir"><></button>
+            <button id="btn_elev_cerrar">><</button>
         </div>
-
-
-        <script src="" async defer></script>
+        <script src="script.js" async defer></script>
     </body>
 </html>
 
