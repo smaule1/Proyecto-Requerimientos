@@ -264,7 +264,12 @@ body{
     grid-column: span 2;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
+    row-gap: 80px;
+    column-gap: 40px;
     align-items: center;
     justify-items: center;
+}
+
+.button-sos{
+    margin-bottom: 10vh;
 }
