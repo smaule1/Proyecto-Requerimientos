@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;    
-    font-size: 3vmin;
+    font-size: 4vmin;
 }
 
 html{
@@ -10,30 +10,28 @@ html{
 }
 
 body{
-    background-color: rgb(13, 84, 146);
-
     display: grid;
     grid-template-columns: 60vw 10vw 30vw;
     min-height: 100%;
 }
 
 #ElevatorContainer{
-    background-color: beige;
+    background-color: whitesmoke;
 }
 
-.Panel{
+.Panel{ 
     display: flex;
     flex-direction: column;    
     align-items: center;        
 }
 
 #PrimaryPanel{
-    background-color: #ccc;
+    background-color: #aaa9a9;
     justify-content: space-between;
 }
 
 #SecondaryPanel{
-    background-color: green;
+    background-color: #ccc;
     justify-content: space-evenly;
 }
 
@@ -272,4 +270,9 @@ body{
 
 .button-sos{
     margin-bottom: 10vh;
+}
+
+.text{
+    font-size: 5vmin;
+    font-weight: 400;
 }
