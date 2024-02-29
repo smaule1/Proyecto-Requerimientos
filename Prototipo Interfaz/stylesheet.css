@@ -180,28 +180,7 @@ body{
     );
 }
 
-.side-shadow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
-    background: hsl(0deg 0% 0% / 0.25);
-    will-change: transform;
-    transform: translateY(2px);
-    transition: transform
-       600ms
-       cubic-bezier(.3, .7, .4, 1);
-} 
-
 .side-edge {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
     background: linear-gradient(
        to left,
        hsl(0, 0%, 0%) 0%,
@@ -212,11 +191,6 @@ body{
 }
 
 .side-front {
-    display: block;
-    position: relative;
-    padding: 12px 27px;
-    border-radius: 12px;
-    font-size: 1.1rem;
     color: black;
     background: linear-gradient(
         45deg,
@@ -228,11 +202,6 @@ body{
         #fff 80%,
         #999 95%
     );
-    will-change: transform;
-    transform: translateY(-4px);
-    transition: transform
-       600ms
-       cubic-bezier(.3, .7, .4, 1);
 }
 
 .button-column {
