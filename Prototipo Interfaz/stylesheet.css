@@ -19,7 +19,6 @@ body{
 
 #ElevatorContainer{
     background-color: beige;
-    display:block;
 }
 
 .Panel{
@@ -170,7 +169,7 @@ body{
     height: 700px; 
     background-color: gray; 
     border: 2px solid gray; 
-    margin: 120px;
+    margin-top: 10vh;
 }
 .puerta {
     position: absolute;
