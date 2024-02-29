@@ -72,28 +72,52 @@
     }
     if (btnP1) { //Selecciona el piso 1
         btnP1.addEventListener('click', function(){
-            if (isClosed == 1 && isDoorMoving == 0 && isElevMoving == 0){
+            if (isClosed == 0 && isDoorMoving == 0 && isElevMoving == 0){
+                cerrarPuertas();
+                setTimeout(function() {
+                    subebajaElevador(1);
+                }, 1000);
+            }
+            else if (isClosed == 1 && isDoorMoving == 0 && isElevMoving == 0){
                 subebajaElevador(1);
             }
         })
     }
     if (btnP2) { //Selecciona el piso 2
         btnP2.addEventListener('click', function(){
-            if (isClosed == 1 && isDoorMoving == 0 && isElevMoving == 0){
+            if (isClosed == 0 && isDoorMoving == 0 && isElevMoving == 0){
+                cerrarPuertas();
+                setTimeout(function() {
+                    subebajaElevador(2);
+                }, 1000);
+            }
+            else if (isClosed == 1 && isDoorMoving == 0 && isElevMoving == 0){
                 subebajaElevador(2);
             }
         })
     }
     if (btnP3) { //Selecciona el piso 3
         btnP3.addEventListener('click', function(){
-            if (isClosed == 1 && isDoorMoving == 0 && isElevMoving == 0){
+            if (isClosed == 0 && isDoorMoving == 0 && isElevMoving == 0){
+                cerrarPuertas();
+                setTimeout(function() {
+                    subebajaElevador(3);
+                }, 1000);
+            }
+            else if (isClosed == 1 && isDoorMoving == 0 && isElevMoving == 0){
                 subebajaElevador(3);
             }
         })
     }
     if (btnP4) { //Selecciona el piso 4
         btnP4.addEventListener('click', function(){
-            if (isClosed == 1 && isDoorMoving == 0 && isElevMoving == 0){
+            if (isClosed == 0 && isDoorMoving == 0 && isElevMoving == 0){
+                cerrarPuertas();
+                setTimeout(function() {
+                    subebajaElevador(4);
+                }, 1000);
+            }
+            else if (isClosed == 1 && isDoorMoving == 0 && isElevMoving == 0){
                 subebajaElevador(4);
             }
         })
