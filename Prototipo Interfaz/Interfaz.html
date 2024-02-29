@@ -19,41 +19,72 @@
             </div>
         </div>
         <div id="SecondaryPanel" class="Panel">
-            <button>⭡</button>
-            <button>⭣</button>
-            <button>+</button>
-            <button>-</button>
-            <button>SOS</button>
+            <button class="button">
+                <span class="shadow side-shadow"></span>
+                <span class="edge side-edge"></span>
+                <span class="front side-front"><img src="./icons/go_up.svg" height="50" width="50"/></span>
+            </button>
+            <button class="button">
+                <span class="shadow side-shadow"></span>
+                <span class="edge side-edge"></span>
+                <span class="front side-front"><img src="./icons/go_down.svg" height="50" width="50"/></span>
+            </button>
+            <button class="button">
+                <span class="shadow side-shadow"></span>
+                <span class="edge side-edge"></span>
+                <span class="front side-front"><img src="./icons/add_user.svg" height="50" width="50"/></span>
+            </button>
+            <button class="button">
+                <span class="shadow side-shadow"></span>
+                <span class="edge side-edge"></span>
+                <span class="front side-front"><img src="./icons/remove_user.svg" height="50" width="50"/></span>
+            </button>
+            <button class="button">
+                <span class="shadow side-shadow"></span>
+                <span class="edge side-edge"></span>
+                <span class="front side-front"><img src="./icons/hazard.svg" height="50" width="50"/></span>
+            </button>
         </div>
         <div id="PrimaryPanel" class="Panel">
             <Header id="hd_elev_screen" class="piso">P3</Header>
-            <button id="btn_elev_4" class="button">
-                <span class="shadow shadow-round"></span>
-                <span class="edge edge-round"></span>
-                <span class="front front-round">4</span>
-            </button>
-            <button id="btn_elev_3" class="button">
-                <span class="shadow shadow-round"></span>
-                <span class="edge edge-round"></span>
-                <span class="front front-round">3</span>
-            </button>
-            <button id="btn_elev_2" class="button">
-                <span class="shadow shadow-round"></span>
-                <span class="edge edge-round"></span>
-                <span class="front front-round">2</span>
-            </button>
-            <button id="btn_elev_1" class="button">
-                <span class="shadow shadow-round"></span>
-                <span class="edge edge-round"></span>
-                <span class="front front-round">1</span>
-            </button>
+            <div class="button-column">
+                <button id="btn_elev_3" class="button">
+                    <span class="shadow shadow-round"></span>
+                    <span class="edge edge-round"></span>
+                    <span class="front front-round">3</span>
+                </button>
+                <button id="btn_elev_4" class="button">
+                    <span class="shadow shadow-round"></span>
+                    <span class="edge edge-round"></span>
+                    <span class="front front-round">4</span>
+                </button>
+                <button id="btn_elev_1" class="button">
+                    <span class="shadow shadow-round"></span>
+                    <span class="edge edge-round"></span>
+                    <span class="front front-round">1</span>
+                </button>
+                <button id="btn_elev_2" class="button">
+                    <span class="shadow shadow-round"></span>
+                    <span class="edge edge-round"></span>
+                    <span class="front front-round">2</span>
+                </button>
+                <button id="btn_elev_abrir" class="button">
+                    <span class="shadow side-shadow"></span>
+                    <span class="edge side-edge"></span>
+                    <span class="front side-front"><img src="./icons/open_door.svg" height="50" width="50"/></span>
+                </button>
+                <button id="btn_elev_cerrar" class="button">
+                    <span class="shadow side-shadow"></span>
+                    <span class="edge side-edge"></span>
+                    <span class="front side-front"><img src="./icons/close_door.svg" height="50" width="50"/></span>
+                </button>
+            </div>
+            
             <button id="btn_elev_sos" class="button">
                 <span class="shadow"></span>
                 <span class="edge"></span>
                 <span class="front text">SOS</span>
-            </button>
-            <button id="btn_elev_abrir"><></button>
-            <button id="btn_elev_cerrar">><</button>
+            </button>       
         </div>
         <script src="script.js" async defer></script>
     </body>
