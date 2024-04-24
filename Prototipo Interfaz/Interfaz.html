@@ -6,16 +6,20 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=1900, initial-scale=1">
         <link rel="stylesheet" href="stylesheet.css">
     </head>
     <body>
         <div id="ElevatorContainer" class="Panel">
             <div class="elevador">
-                <div id="puerta_elev_izq" class="puerta puerta-izq"></div>
+                <span id="outElev" class="outElev"> <img draggable="false" src="./icons/outsideElev.png" height="800" width="1300"/> </span>
+                <span id="inElev" class="inElev"> <img draggable="false" src="./icons/insideElev.png" height="520" width="340"/> </span>
+                <span id="puerta_elev_izq" class="puerta puerta-izq"> <img draggable="false" src="./icons/leftDoor.png" height="520" width="170"/> </span>
+                <span id="puerta_elev_der" class="puerta puerta-der"> <img draggable="false" src="./icons/rightDoor.png" height="520" width="170"/> </span>
+                <!-- <div id="puerta_elev_izq" class="puerta puerta-izq"></div>
                 <div id="puerta_elev_der" class="puerta puerta-der"></div>
                 <div id="base_elev_izq" class="base base-izq"></div>
-                <div id="base_elev_der" class="base base-der"></div>
+                <div id="base_elev_der" class="base base-der"></div> -->
             </div>
         </div>
         <div id="SecondaryPanel" class="Panel">
@@ -38,12 +42,7 @@
                 <span class="shadow side-shadow"></span>
                 <span class="edge side-edge"></span>
                 <span class="front side-front"><img draggable="false" src="./icons/remove_user.svg" height="50" width="50"/></span>
-            </button>
-            <button class="button">
-                <span class="shadow side-shadow"></span>
-                <span class="edge side-edge"></span>
-                <span class="front side-front"><img draggable="false" src="./icons/hazard.svg" height="50" width="50"/></span>
-            </button>
+            </button>            
         </div>
         <div id="PrimaryPanel" class="Panel">
             <Header id="hd_elev_screen" class="piso">P3</Header>
@@ -77,6 +76,16 @@
                     <span class="shadow side-shadow"></span>
                     <span class="edge side-edge"></span>
                     <span class="front side-front"><img draggable="false" src="./icons/close_door.svg" height="50" width="50"/></span>
+                </button>
+                <button id="btn_add_floor" class="button">
+                    <span class="shadow side-shadow"></span>
+                    <span class="edge side-edge"></span>
+                    <span class="front side-front"><img draggable="false" src="./icons/add_user.svg" height="50" width="50"/></span>
+                </button>
+                <button id="btn_remove_floor" class="button">
+                    <span class="shadow side-shadow"></span>
+                    <span class="edge side-edge"></span>
+                    <span class="front side-front"><img draggable="false" src="./icons/remove_user.svg" height="50" width="50"/></span>
                 </button>
             </div>
             

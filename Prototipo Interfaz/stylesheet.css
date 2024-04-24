@@ -21,7 +21,7 @@ body{
 }
 
 .Panel{ 
-    display: flex;
+    display: flex;    
     flex-direction: column;    
     align-items: center;        
 }
@@ -29,34 +29,63 @@ body{
 #PrimaryPanel{
     background-color: #aaa9a9;
     justify-content: space-between;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 400px;
+    height: 100vh;
 }
 
 #SecondaryPanel{
     background-color: #ccc;
     justify-content: space-evenly;
+    position: fixed;
+    top: 0px;
+    right: 400px;
+    width: 150px;
+    height: 100vh;
 }
 
 /* Taken From https://unused-css.com/blog/round-buttons/ */
 .elevador {
-    position: relative;
-    width: 700px; 
-    height: 700px; 
-    background-color: gray; 
-    border: 2px solid gray; 
-    margin-top: 10vh;
-}
-.puerta {
     position: absolute;
-    width: 200px; 
-    height: 700px; 
+    display: grid;
+    grid-column: 1;
+    grid-row-end: 40px;
+
+    width: 1370px; 
+    height: 820px;
+    left: 0px; 
+    background-color: gray; 
+}
+
+.outElev {
+    position: absolute;
+    z-index: 3;
+    top:0px; 
+    left: 30px; 
+}
+
+.inElev{
+    position: absolute;
+    z-index: 2;
+    top: 130px;
+    left: 500px;
+}
+
+.puerta {
+    position: absolute;    
     background-color: rgb(78, 78, 78);
     transition: all 1s ease;
+    z-index: 2;
 }
 .puerta-izq{
-    left: 0;
+    top: 130px;
+    left: 330px;
 }
 .puerta-der{
-    left: 500px;
+    top:130px;
+    left: 840px;
 }
 .base{
     position: absolute;
@@ -263,7 +292,7 @@ body{
     grid-column: span 2;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    row-gap: 80px;
+    row-gap: 60px;
     column-gap: 40px;
     align-items: center;
     justify-items: center;

@@ -1,8 +1,10 @@
- window.addEventListener("load", function() {
+
+window.addEventListener("load", function() {
     /*Puertas, si están cerradas y constante de movimiento*/
+
     const puertaIzq = document.getElementById('puerta_elev_izq');
     const puertaDer = document.getElementById('puerta_elev_der');
-    const pasoDeMovimiento = 150;
+    const pasoDeMovimiento = 170;
     let isClosed = 0; //0 abierta, 1 cerrada
     let isDoorMoving = 0; //0 quieta, 1 moviendo
     let isElevMoving = 0; //0 quieto, 1 moviendo
