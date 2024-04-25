@@ -6,12 +6,10 @@ window.addEventListener("load", function() {
 
    
     const elevatorContainer = document.getElementById("ElevatorContainer");
-    const floorList = [];
+    let floorList = [];
 
-    const i = 830;
-    addFloor(i*0);
-    addFloor(i*1);
-    addFloor(i*2);
+    let currentTop = 0;
+        
 
     //const puertaIzq = document.getElementById("puerta_elev_izq");
     //const puertaDer = document.getElementById('puerta_elev_der');
@@ -21,6 +19,7 @@ window.addEventListener("load", function() {
     let isElevMoving = 0; //0 quieto, 1 moviendo
 
     /*Botones y pantalla*/
+    const btnAddFloor = document.getElementById('btn_add_floor');
     const btnCerrar = document.getElementById('btn_elev_cerrar');
     const btnAbrir = document.getElementById('btn_elev_abrir');
     const btnP1 = document.getElementById("btn_elev_1");
@@ -31,11 +30,11 @@ window.addEventListener("load", function() {
 
 
 
-    function addFloor(top){
+    function addFloor(){
         
         const elevator = document.createElement("div");    
         elevator.className = "elevador";
-        elevator.style.top= `${top + 30}px`;           
+        elevator.style.top= `${currentTop + 30}px`;           
         
         const outElevator = document.createElement("span");
         outElevator.innerHTML = "<img draggable=\"false\" src=\"./icons/outsideElev.png\" height=\"800\" width=\"1300\"/>";
@@ -64,7 +63,8 @@ window.addEventListener("load", function() {
            
         floorList.push(elevator);
         elevatorContainer.appendChild(elevator);
-        elevatorContainer.style.height = `${top+840}px`;
+        currentTop += 850;
+        elevatorContainer.style.height = `${currentTop}px`;
     }
 
 
@@ -176,5 +176,8 @@ window.addEventListener("load", function() {
                 subebajaElevador(4);
             }
         })
+    }
+    if (btnAddFloor) { 
+        btnAddFloor.addEventListener('click', addFloor)
     }
 });
