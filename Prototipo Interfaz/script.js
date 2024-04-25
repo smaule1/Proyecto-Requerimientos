@@ -4,41 +4,14 @@ window.addEventListener("load", function() {
 
     //const elevator = document.createElement("div");
 
+   
     const elevatorContainer = document.getElementById("ElevatorContainer");
+    const floorList = [];
 
-    const elevator = document.createElement("div");
-    elevator.className = "elevador";
-    elevator.style.top= `${20}px`;
-    
-    const currentTop = parseInt(getComputedStyle(elevator).top);    
-    
-    const outElevator = document.createElement("span");
-    outElevator.innerHTML = "<img draggable=\"false\" src=\"./icons/outsideElev.png\" height=\"800\" width=\"1300\"/>";
-    outElevator.className = "outElev";
-    outElevator.style.top = `${currentTop}px`;
-
-    const inElevator = document.createElement("span");
-    inElevator.innerHTML = "<img draggable=\"false\" src=\"./icons/insideElev.png\" height=\"520\" width=\"340\"/>";
-    inElevator.className = "inElev";
-    inElevator.style.top = `${currentTop+130}px`;
-
-    const leftDoor = document.createElement("span");
-    leftDoor.innerHTML = "<img draggable=\"false\" src=\"./icons/leftDoor.png\" height=\"520\" width=\"170\"/>";
-    leftDoor.className = "puerta puerta-izq";
-    leftDoor.style.top = `${currentTop+130}px`;
-
-    const rightDoor = document.createElement("span");
-    rightDoor.innerHTML = "<img draggable=\"false\" src=\"./icons/rightDoor.png\" height=\"520\" width=\"170\"/>";
-    rightDoor.className = "puerta puerta-der";
-    rightDoor.style.top = `${currentTop+130}px`;    
-    
-    elevator.appendChild(outElevator);
-    elevator.appendChild(inElevator);
-    elevator.appendChild(leftDoor);
-    elevator.appendChild(rightDoor);
-
-    elevatorContainer.appendChild(elevator);
-
+    const i = 830;
+    addFloor(i*0);
+    addFloor(i*1);
+    addFloor(i*2);
 
     //const puertaIzq = document.getElementById("puerta_elev_izq");
     //const puertaDer = document.getElementById('puerta_elev_der');
@@ -55,6 +28,50 @@ window.addEventListener("load", function() {
     const btnP3 = document.getElementById("btn_elev_3");
     const btnP4 = document.getElementById("btn_elev_4");
     const elevScreen = document.getElementById("hd_elev_screen");
+
+
+
+    function addFloor(top){
+        
+        const elevator = document.createElement("div");    
+        elevator.className = "elevador";
+        elevator.style.top= `${top + 30}px`;
+        
+        const currentTop = parseInt(getComputedStyle(elevator).top);    
+        
+        const outElevator = document.createElement("span");
+        outElevator.innerHTML = "<img draggable=\"false\" src=\"./icons/outsideElev.png\" height=\"800\" width=\"1300\"/>";
+        outElevator.className = "outElev";
+        outElevator.style.top = `${currentTop}px`;
+    
+        const inElevator = document.createElement("span");
+        inElevator.innerHTML = "<img draggable=\"false\" src=\"./icons/insideElev.png\" height=\"520\" width=\"340\"/>";
+        inElevator.className = "inElev";
+        inElevator.style.top = `${currentTop+130}px`;
+    
+        const leftDoor = document.createElement("span");
+        leftDoor.innerHTML = "<img draggable=\"false\" src=\"./icons/leftDoor.png\" height=\"520\" width=\"170\"/>";
+        leftDoor.className = "puerta puerta-izq";
+        leftDoor.style.top = `${currentTop+130}px`;
+    
+        const rightDoor = document.createElement("span");
+        rightDoor.innerHTML = "<img draggable=\"false\" src=\"./icons/rightDoor.png\" height=\"520\" width=\"170\"/>";
+        rightDoor.className = "puerta puerta-der";
+        rightDoor.style.top = `${currentTop+130}px`;    
+        
+        elevator.appendChild(outElevator);
+        elevator.appendChild(inElevator);
+        elevator.appendChild(leftDoor);
+        elevator.appendChild(rightDoor);
+           
+        floorList.push(elevator);
+        elevatorContainer.appendChild(elevator);
+        elevatorContainer.style.height = `${top+840}px`;
+    }
+
+
+
+
   
     function moverPuertasDer(puerta) {
       const posicionActual = parseInt(getComputedStyle(puerta).left);

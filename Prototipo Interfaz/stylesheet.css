@@ -16,10 +16,6 @@ body{
     min-height: 100%;
 }
 
-#ElevatorContainer{
-    background-color: whitesmoke;
-}
-
 .Panel{ 
     display: flex;    
     flex-direction: column;    
@@ -47,27 +43,26 @@ body{
 }
 
 /* Taken From https://unused-css.com/blog/round-buttons/ */
-.elevador {
-    position: absolute;
-    
 
-    width: 1370px; 
-    height: 3000px;
-    left: 0px;     
-    background-color: gray; 
+#ElevatorContainer{
+    background-color: rgb(80, 79, 79);
+    width: 1370px;  
+}
+
+.elevador {
+    position: absolute;        
+    left: 0px;         
 }
 
 .outElev {
     position: absolute;
-    z-index: 3;
-    top: 0px;
-    left: 30px; 
+    z-index: 3;    
+    left: 22px; 
 }
 
 .inElev{
     position: absolute;
-    z-index: 2;
-    top: 130px;
+    z-index: 2;    
     left: 500px;
 }
 
@@ -77,12 +72,10 @@ body{
     transition: all 1s ease;
     z-index: 2;
 }
-.puerta-izq{
-    top: 130px;
+.puerta-izq{    
     left: 330px;
 }
-.puerta-der{
-    top:130px;
+.puerta-der{    
     left: 840px;
 }
 .base{
