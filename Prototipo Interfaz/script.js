@@ -35,29 +35,27 @@ window.addEventListener("load", function() {
         
         const elevator = document.createElement("div");    
         elevator.className = "elevador";
-        elevator.style.top= `${top + 30}px`;
-        
-        const currentTop = parseInt(getComputedStyle(elevator).top);    
+        elevator.style.top= `${top + 30}px`;           
         
         const outElevator = document.createElement("span");
         outElevator.innerHTML = "<img draggable=\"false\" src=\"./icons/outsideElev.png\" height=\"800\" width=\"1300\"/>";
         outElevator.className = "outElev";
-        outElevator.style.top = `${currentTop}px`;
+        outElevator.style.top = `${0}px`;
     
         const inElevator = document.createElement("span");
         inElevator.innerHTML = "<img draggable=\"false\" src=\"./icons/insideElev.png\" height=\"520\" width=\"340\"/>";
         inElevator.className = "inElev";
-        inElevator.style.top = `${currentTop+130}px`;
+        inElevator.style.top = `${130}px`;
     
         const leftDoor = document.createElement("span");
         leftDoor.innerHTML = "<img draggable=\"false\" src=\"./icons/leftDoor.png\" height=\"520\" width=\"170\"/>";
         leftDoor.className = "puerta puerta-izq";
-        leftDoor.style.top = `${currentTop+130}px`;
+        leftDoor.style.top = `${130}px`;
     
         const rightDoor = document.createElement("span");
         rightDoor.innerHTML = "<img draggable=\"false\" src=\"./icons/rightDoor.png\" height=\"520\" width=\"170\"/>";
         rightDoor.className = "puerta puerta-der";
-        rightDoor.style.top = `${currentTop+130}px`;    
+        rightDoor.style.top = `${130}px`;    
         
         elevator.appendChild(outElevator);
         elevator.appendChild(inElevator);
