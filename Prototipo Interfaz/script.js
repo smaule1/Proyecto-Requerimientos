@@ -1,126 +1,62 @@
 
-window.addEventListener("load", function() {
+let btnAddFloor;
+let btnCerrar;
+let btnAbrir;
+let btnP1;
+let btnP2;
+let btnP3;
+let btnP4;
+let elevScreen;
+
+let elevatorContainer
+
+let floorList = [];
+
+let currentTop = 0;
+
+
+let pasoDeMovimiento = 170;
+let isClosed = 0; //0 abierta, 1 cerrada
+let isDoorMoving = 0; //0 quieta, 1 moviendo
+let isElevMoving = 0; //0 quieto, 1 moviendo
+
+let x = 0;
+let y = 0;
+
+
+
+function loadPage(){
     /*Puertas, si están cerradas y constante de movimiento*/
 
     //const elevator = document.createElement("div");
 
    
-    const elevatorContainer = document.getElementById("ElevatorContainer");
-    let floorList = [];
-
-    let currentTop = 0;
-        
+    elevatorContainer = document.getElementById("ElevatorContainer");
+     
 
     //const puertaIzq = document.getElementById("puerta_elev_izq");
     //const puertaDer = document.getElementById('puerta_elev_der');
-    const pasoDeMovimiento = 170;
-    let isClosed = 0; //0 abierta, 1 cerrada
-    let isDoorMoving = 0; //0 quieta, 1 moviendo
-    let isElevMoving = 0; //0 quieto, 1 moviendo
-
+    
     /*Botones y pantalla*/
-    const btnAddFloor = document.getElementById('btn_add_floor');
-    const btnCerrar = document.getElementById('btn_elev_cerrar');
-    const btnAbrir = document.getElementById('btn_elev_abrir');
-    const btnP1 = document.getElementById("btn_elev_1");
-    const btnP2 = document.getElementById("btn_elev_2");
-    const btnP3 = document.getElementById("btn_elev_3");
-    const btnP4 = document.getElementById("btn_elev_4");
-    const elevScreen = document.getElementById("hd_elev_screen");
-
-
-
-    function addFloor(){
-        
-        const elevator = document.createElement("div");    
-        elevator.className = "elevador";
-        elevator.style.top= `${currentTop + 30}px`;           
-        
-        const outElevator = document.createElement("span");
-        outElevator.innerHTML = "<img draggable=\"false\" src=\"./icons/outsideElev.png\" height=\"800\" width=\"1300\"/>";
-        outElevator.className = "outElev";
-        outElevator.style.top = `${0}px`;
-    
-        const inElevator = document.createElement("span");
-        inElevator.innerHTML = "<img draggable=\"false\" src=\"./icons/insideElev.png\" height=\"520\" width=\"340\"/>";
-        inElevator.className = "inElev";
-        inElevator.style.top = `${130}px`;
-    
-        const leftDoor = document.createElement("span");
-        leftDoor.innerHTML = "<img draggable=\"false\" src=\"./icons/leftDoor.png\" height=\"520\" width=\"170\"/>";
-        leftDoor.className = "puerta puerta-izq";
-        leftDoor.style.top = `${130}px`;
-    
-        const rightDoor = document.createElement("span");
-        rightDoor.innerHTML = "<img draggable=\"false\" src=\"./icons/rightDoor.png\" height=\"520\" width=\"170\"/>";
-        rightDoor.className = "puerta puerta-der";
-        rightDoor.style.top = `${130}px`;    
-        
-        elevator.appendChild(outElevator);
-        elevator.appendChild(inElevator);
-        elevator.appendChild(leftDoor);
-        elevator.appendChild(rightDoor);
-           
-        floorList.push(elevator);
-        elevatorContainer.appendChild(elevator);
-        currentTop += 850;
-        elevatorContainer.style.height = `${currentTop}px`;
-    }
-
-
-
-
-  
-    function moverPuertasDer(puerta) {
-      const posicionActual = parseInt(getComputedStyle(puerta).left);
-      puerta.style.left = `${posicionActual + pasoDeMovimiento}px`;
-    }
-  
-    function moverPuertasIzq(puerta) {
-      const posicionActual = parseInt(getComputedStyle(puerta).left);
-      puerta.style.left = `${posicionActual - pasoDeMovimiento}px`;
-    }
-    
-    function abrirPuertas(){
-        isDoorMoving = 1;
-        moverPuertasDer(rightDoor);
-        moverPuertasIzq(leftDoor);
-        setTimeout(function() {
-            isClosed = 0;
-            isDoorMoving = 0;
-        }, 1000);
-    }
-    function cerrarPuertas(){
-        isDoorMoving = 1;
-        moverPuertasDer(leftDoor);
-        moverPuertasIzq(rightDoor);
-        setTimeout(function() {
-            isClosed = 1;
-            isDoorMoving = 0;
-        }, 1000);
-    }
-
-    function subebajaElevador(piso){
-        isElevMoving = 1;
-        setTimeout(function() {
-            elevScreen.textContent = "P" + piso;
-            isElevMoving = 0;
-            abrirPuertas();
-        }, 1000);
-    }
-    
-    /*Acciones de botones del panel interno*/
+    btnAddFloor = document.getElementById('btn_add_floor');
+    btnCerrar = document.getElementById('btn_elev_cerrar');
+    btnAbrir = document.getElementById('btn_elev_abrir');
+    btnP1 = document.getElementById("btn_elev_1");
+    btnP2 = document.getElementById("btn_elev_2");
+    btnP3 = document.getElementById("btn_elev_3");
+    btnP4 = document.getElementById("btn_elev_4");
+    elevScreen = document.getElementById("hd_elev_screen");
 
     if (btnCerrar) { //Cierra ambas puertas manualmente
         btnCerrar.addEventListener('click', function() {
-            if (isClosed == 0 && isDoorMoving == 0 && isElevMoving == 0){
+            if (isDoorMoving == 0){
                 cerrarPuertas();
             }
         });
       }
     if (btnAbrir) { //Abre ambas puertas manualmente
         btnAbrir.addEventListener('click', function(){
-            if (isClosed == 1 && isDoorMoving == 0 && isElevMoving == 0){
+            if (isDoorMoving == 0){
                 abrirPuertas();
             }
         })
@@ -180,4 +116,103 @@ window.addEventListener("load", function() {
     if (btnAddFloor) { 
         btnAddFloor.addEventListener('click', addFloor)
     }
+}
+
+function addFloor(){        
+        
+    const elevator = document.createElement("div");    
+    elevator.className = "elevador";
+    elevator.style.top= `${currentTop + 30}px`;           
+    
+    const outElevator = document.createElement("span");
+    outElevator.innerHTML = "<img draggable=\"false\" src=\"./icons/outsideElev.png\" height=\"800\" width=\"1300\"/>";
+    outElevator.className = "outElev";
+    outElevator.style.top = `${0}px`;
+
+    const inElevator = document.createElement("span");
+    inElevator.innerHTML = "<img draggable=\"false\" src=\"./icons/insideElev.png\" height=\"520\" width=\"340\"/>";
+    inElevator.className = "inElev";
+    inElevator.style.top = `${130}px`;
+
+    const leftDoor = document.createElement("span");
+    leftDoor.innerHTML = "<img draggable=\"false\" src=\"./icons/leftDoor.png\" height=\"520\" width=\"170\"/>";
+    leftDoor.className = "puerta puerta-izq";
+    leftDoor.style.top = `${130}px`;
+
+    const rightDoor = document.createElement("span");
+    rightDoor.innerHTML = "<img draggable=\"false\" src=\"./icons/rightDoor.png\" height=\"520\" width=\"170\"/>";
+    rightDoor.className = "puerta puerta-der";
+    rightDoor.style.top = `${130}px`;    
+    
+    elevator.appendChild(outElevator);
+    elevator.appendChild(inElevator);
+    elevator.appendChild(leftDoor);
+    elevator.appendChild(rightDoor);
+       
+    floorList.push(elevator);
+    elevatorContainer.appendChild(elevator);
+    currentTop += 850;
+    elevatorContainer.style.height = `${currentTop}px`;    
+    console.log(y);
+}
+
+function moverPuertasDer(puerta) {        
+    const posicionActual = parseInt(getComputedStyle(puerta).left);
+    puerta.style.left = `${posicionActual + pasoDeMovimiento}px`;
+  }
+
+function moverPuertasIzq(puerta) {
+    const posicionActual = parseInt(getComputedStyle(puerta).left);
+    puerta.style.left = `${posicionActual - pasoDeMovimiento}px`;
+}
+
+function abrirPuertas(){
+    const index = y/850;
+    console.log(index, y);
+    const floor = floorList[Math.floor(y/850)];
+    const leftDoor = floor.childNodes[2];
+    const rightDoor = floor.childNodes[3];
+    isDoorMoving = 1;        
+    moverPuertasDer(rightDoor);
+    moverPuertasIzq(leftDoor);
+    setTimeout(function() {
+        isClosed = 0;
+        isDoorMoving = 0;
+    }, 1000);
+}
+function cerrarPuertas(){
+    const index = y/850;
+    console.log(index, y);
+    const floor = floorList[Math.floor(y/850)];
+    const leftDoor = floor.childNodes[2];
+    const rightDoor = floor.childNodes[3];
+    isDoorMoving = 1;
+    moverPuertasDer(leftDoor);
+    moverPuertasIzq(rightDoor);
+    setTimeout(function() {
+        isClosed = 1;
+        isDoorMoving = 0;
+    }, 1000);
+}
+
+function subebajaElevador(piso){
+    isElevMoving = 1;
+    setTimeout(function() {
+        elevScreen.textContent = "P" + piso;
+        isElevMoving = 0;
+        abrirPuertas();
+    }, 1000);
+}
+
+window.addEventListener("load", loadPage);
+
+function showCoords(event) {
+    x = event.clientX;   
+    y = event.pageY; 
+}
+
+document.addEventListener("scroll", (event)=>{
+    x = event.clientX;   
+    y = event.pageY; 
 });
+
