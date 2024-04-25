@@ -2,8 +2,46 @@
 window.addEventListener("load", function() {
     /*Puertas, si están cerradas y constante de movimiento*/
 
-    const puertaIzq = document.getElementById('puerta_elev_izq');
-    const puertaDer = document.getElementById('puerta_elev_der');
+    //const elevator = document.createElement("div");
+
+    const elevatorContainer = document.getElementById("ElevatorContainer");
+
+    const elevator = document.createElement("div");
+    elevator.className = "elevador";
+    elevator.style.top= `${20}px`;
+    
+    const currentTop = parseInt(getComputedStyle(elevator).top);    
+    
+    const outElevator = document.createElement("span");
+    outElevator.innerHTML = "<img draggable=\"false\" src=\"./icons/outsideElev.png\" height=\"800\" width=\"1300\"/>";
+    outElevator.className = "outElev";
+    outElevator.style.top = `${currentTop}px`;
+
+    const inElevator = document.createElement("span");
+    inElevator.innerHTML = "<img draggable=\"false\" src=\"./icons/insideElev.png\" height=\"520\" width=\"340\"/>";
+    inElevator.className = "inElev";
+    inElevator.style.top = `${currentTop+130}px`;
+
+    const leftDoor = document.createElement("span");
+    leftDoor.innerHTML = "<img draggable=\"false\" src=\"./icons/leftDoor.png\" height=\"520\" width=\"170\"/>";
+    leftDoor.className = "puerta puerta-izq";
+    leftDoor.style.top = `${currentTop+130}px`;
+
+    const rightDoor = document.createElement("span");
+    rightDoor.innerHTML = "<img draggable=\"false\" src=\"./icons/rightDoor.png\" height=\"520\" width=\"170\"/>";
+    rightDoor.className = "puerta puerta-der";
+    rightDoor.style.top = `${currentTop+130}px`;    
+    
+    elevator.appendChild(outElevator);
+    elevator.appendChild(inElevator);
+    elevator.appendChild(leftDoor);
+    elevator.appendChild(rightDoor);
+
+    elevatorContainer.appendChild(elevator);
+
+
+    //const puertaIzq = document.getElementById("puerta_elev_izq");
+    //const puertaDer = document.getElementById('puerta_elev_der');
     const pasoDeMovimiento = 170;
     let isClosed = 0; //0 abierta, 1 cerrada
     let isDoorMoving = 0; //0 quieta, 1 moviendo
@@ -30,8 +68,8 @@ window.addEventListener("load", function() {
     
     function abrirPuertas(){
         isDoorMoving = 1;
-        moverPuertasDer(puertaDer);
-        moverPuertasIzq(puertaIzq);
+        moverPuertasDer(rightDoor);
+        moverPuertasIzq(leftDoor);
         setTimeout(function() {
             isClosed = 0;
             isDoorMoving = 0;
@@ -39,8 +77,8 @@ window.addEventListener("load", function() {
     }
     function cerrarPuertas(){
         isDoorMoving = 1;
-        moverPuertasDer(puertaIzq);
-        moverPuertasIzq(puertaDer);
+        moverPuertasDer(leftDoor);
+        moverPuertasIzq(rightDoor);
         setTimeout(function() {
             isClosed = 1;
             isDoorMoving = 0;

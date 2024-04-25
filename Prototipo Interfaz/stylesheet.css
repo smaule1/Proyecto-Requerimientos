@@ -49,20 +49,18 @@ body{
 /* Taken From https://unused-css.com/blog/round-buttons/ */
 .elevador {
     position: absolute;
-    display: grid;
-    grid-column: 1;
-    grid-row-end: 40px;
+    
 
     width: 1370px; 
-    height: 820px;
-    left: 0px; 
+    height: 3000px;
+    left: 0px;     
     background-color: gray; 
 }
 
 .outElev {
     position: absolute;
     z-index: 3;
-    top:0px; 
+    top: 0px;
     left: 30px; 
 }
 
