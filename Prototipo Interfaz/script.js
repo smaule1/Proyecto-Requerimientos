@@ -1,5 +1,6 @@
 
 let btnAddFloor;
+let btnRemoveFloor;
 let btnCerrar;
 let btnAbrir;
 let btnP1;
@@ -40,6 +41,7 @@ function loadPage(){
     
     /*Botones y pantalla*/
     btnAddFloor = document.getElementById('btn_add_floor');
+    btnRemoveFloor = document.getElementById('btn_remove_floor');
     btnCerrar = document.getElementById('btn_elev_cerrar');
     btnAbrir = document.getElementById('btn_elev_abrir');
     btnP1 = document.getElementById("btn_elev_1");
@@ -88,7 +90,10 @@ function loadPage(){
             addFloor(floorAmount);
         })
     }
-};
+    if (btnRemoveFloor) { 
+        btnRemoveFloor.addEventListener('click', removeFloor)
+    }
+}
 
 function addFloor(numpiso){        
         
@@ -135,6 +140,19 @@ function addFloor(numpiso){
     console.log(y);
     console.log(floorNumber);
 };
+
+function removeFloor() {
+    if (floorList.length > 0) {
+        const removedFloor = floorList.pop();
+        removedFloor.remove();
+        currentTop -= 850;
+        elevatorContainer.style.height = `${currentTop}px`;
+        console.log(y);
+    } else {
+        console.log("No floors to remove");
+    }
+}
+
 
 function moverPuertasDer(puerta) {        
     const posicionActual = parseInt(getComputedStyle(puerta).left);
