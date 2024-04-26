@@ -51,10 +51,6 @@ function loadPage(){
     btnRemoveFloor = document.getElementById('btn_remove_floor');
     btnCerrar = document.getElementById('btn_elev_cerrar');
     btnAbrir = document.getElementById('btn_elev_abrir');
-    btnP1 = document.getElementById("btn_elev_1");
-    btnP2 = document.getElementById("btn_elev_2");
-    btnP3 = document.getElementById("btn_elev_3");
-    btnP4 = document.getElementById("btn_elev_4");
     btnRequestElevDown = document.getElementById("btn_request_elev_down");
     btnRequestElevUp = document.getElementById("btn_request_elev_up");
     elevScreen = document.getElementById("hd_elev_screen");
@@ -79,35 +75,13 @@ function loadPage(){
             solicitarElevadorDown();
         })
     }
-    if (btnP1) { //Selecciona el piso 1
-        btnP1.addEventListener('click', function(){
-            llegarPisoSeleccionado(1);
-        })
-    }
-    if (btnP2) { //Selecciona el piso 2
-        btnP2.addEventListener('click', function(){
-            llegarPisoSeleccionado(2);
-        })
-    }
-    if (btnP3) { //Selecciona el piso 3
-        btnP3.addEventListener('click', function(){
-            llegarPisoSeleccionado(3);
-        })
-    }
-    if (btnP4) { //Selecciona el piso 4
-        btnP4.addEventListener('click', function(){
-            llegarPisoSeleccionado(4);
-        })
-    }
     if (btnAddFloor) { 
         btnAddFloor.addEventListener('click', function(){
-            floorAmount += 1;
             addFloor(floorAmount);
         })
     }
     if (btnRemoveFloor) {
         btnRemoveFloor.addEventListener('click', function(){
-            floorAmount -= 1;
             removeFloor();
         })
     }
@@ -185,6 +159,7 @@ function addFloor(){
     currentTop += 850;
     elevatorContainer.style.height = `${currentTop}px`; 
     addButton(floorCount);
+    floorAmount++;
     updateFloorNum();
 };
 
@@ -197,6 +172,7 @@ function removeFloor() {
         elevatorContainer.style.height = `${currentTop}px`;
         removeButton();
         updateFloorNum();
+        floorAmount--;
     } else {
         console.log("No floors to remove");
     }
@@ -266,7 +242,10 @@ function subebajaElevador(piso){
         elevScreen.textContent = "P" + piso;
         isElevMoving = 0;
         abrirPuertas();
-    }, 1000);
+        setTimeout(function() {
+            cerrarPuertas();
+        }, 2000);
+    }, 1500);
 };
 
 //Función que mueve el elevador al piso seleccionado en el panel interno
@@ -299,8 +278,13 @@ function solicitarElevadorUp(){
                 } else{
                     if(currentFloor > floorNumber){
                         console.log("Bajando");
+                        currentFloor = floorNumber;
+                        subebajaElevador(floorNumber);
+                        
                     } else{
                         console.log("Subiendo");
+                        currentFloor = floorNumber;
+                        subebajaElevador(floorNumber);
                     }
                 }
             }
@@ -327,8 +311,12 @@ function solicitarElevadorDown(){
                 } else{
                     if(currentFloor > floorNumber){
                         console.log("Bajando");
+                        currentFloor = floorNumber;
+                        subebajaElevador(floorNumber);
                     } else{
                         console.log("Subiendo");
+                        currentFloor = floorNumber;
+                        subebajaElevador(floorNumber);
                     }
                 }
             }
