@@ -295,10 +295,11 @@ body{
     grid-column: span 2;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    row-gap: 60px;
+    row-gap: 40px;
     column-gap: 40px;
     align-items: center;
     justify-items: center;
+    margin-block: 10px;
 }
 
 .button-sos{

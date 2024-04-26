@@ -8,9 +8,12 @@ let btnP2;
 let btnP3;
 let btnP4;
 let elevScreen;
+let floorButtonContainer;
 
 let elevatorContainer
 
+const maxFloors = 8;
+let floorCount = 0;
 let floorList = [];
 
 let currentTop = 0;
@@ -34,6 +37,8 @@ function loadPage(){
 
    
     elevatorContainer = document.getElementById("ElevatorContainer");
+
+    floorButtonContainer = document.getElementById("floorButtonContainer");
      
 
     //const puertaIzq = document.getElementById("puerta_elev_izq");
@@ -95,7 +100,35 @@ function loadPage(){
     }
 }
 
-function addFloor(numpiso){        
+
+// Is callled by addFloor
+function addButton(floorNum){
+    const button = document.createElement("button");
+    button.className = "button"; 
+
+    const btnShadow = document.createElement("span");
+    btnShadow.className = "shadow shadow-round";
+
+    const btnEdge = document.createElement("span");
+    btnEdge.className = "edge edge-round";
+
+    const btnFront = document.createElement("span");
+    btnFront.className = "front front-round";
+    btnFront.innerHTML = `${floorNum}`;    
+    
+    button.appendChild(btnShadow);
+    button.appendChild(btnEdge);
+    button.appendChild(btnFront);
+
+    floorButtonContainer.appendChild(button);
+}
+
+function addFloor(){      
+    if(floorCount>=maxFloors){
+        return;
+    }  
+
+    floorCount++;
         
     const elevator = document.createElement("div");    
     elevator.className = "elevador";
@@ -123,7 +156,7 @@ function addFloor(numpiso){
     
     //Número de piso
     const floorNumber = document.createElement("span");
-    floorNumber.textContent = `P${numpiso}`;
+    floorNumber.textContent = `P${floorCount}`;
     floorNumber.className = "floor-number";
     floorNumber.style.top = `${60}px`;
     
@@ -137,8 +170,9 @@ function addFloor(numpiso){
     elevatorContainer.appendChild(elevator);
     currentTop += 850;
     elevatorContainer.style.height = `${currentTop}px`; 
+    addButton(floorCount);
     console.log(y);
-    console.log(floorNumber);
+    console.log(floorCount);
 };
 
 function removeFloor() {
