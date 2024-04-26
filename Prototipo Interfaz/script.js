@@ -48,6 +48,8 @@ function loadPage(){
     btnP2 = document.getElementById("btn_elev_2");
     btnP3 = document.getElementById("btn_elev_3");
     btnP4 = document.getElementById("btn_elev_4");
+    btnRequestElevDown = document.getElementById("btn_request_elev_down");
+    btnRequestElevUp = document.getElementById("btn_request_elev_up");
     elevScreen = document.getElementById("hd_elev_screen");
 
     if (btnCerrar) { //Cierra ambas puertas manualmente
@@ -63,6 +65,9 @@ function loadPage(){
                 abrirPuertas();
             }
         })
+    }
+    if (btnRequestElevUp){
+        
     }
     if (btnP1) { //Selecciona el piso 1
         btnP1.addEventListener('click', function(){
