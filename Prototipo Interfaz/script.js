@@ -15,6 +15,7 @@ let elevatorContainer
 const maxFloors = 8;
 let floorCount = 0;
 let floorList = [];
+let floorButtonList = [];
 
 let currentTop = 0;
 
@@ -121,6 +122,7 @@ function addButton(floorNum){
     button.appendChild(btnFront);
 
     floorButtonContainer.appendChild(button);
+    floorButtonList.unshift(button);
 }
 
 function addFloor(){      
@@ -181,9 +183,17 @@ function removeFloor() {
         removedFloor.remove();
         currentTop -= 850;
         elevatorContainer.style.height = `${currentTop}px`;
+        removeButton();
         updateFloorNum();
     } else {
         console.log("No floors to remove");
+    }
+}
+
+function removeButton() {
+    if (floorButtonList.length > 0) {
+        const removedButton = floorButtonList.shift();        
+        removedButton.remove();                    
     }
 }
 
