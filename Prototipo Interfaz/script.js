@@ -57,22 +57,26 @@ function loadPage(){
 
     if (btnCerrar) { //Cierra ambas puertas manualmente
         btnCerrar.addEventListener('click', function() {
-            cerrarPuertas();
+            const floorNum = obtienePisoEnPantalla();
+            cerrarPuertas(floorNum);
         });
       }
     if (btnAbrir) { //Abre ambas puertas manualmente
         btnAbrir.addEventListener('click', function(){
-            abrirPuertas();
+            const floorNum = obtienePisoEnPantalla();
+            abrirPuertas(floorNum);
         })
     }
     if(btnRequestElevUp){
         btnRequestElevUp.addEventListener('click', function(){
-            solicitarElevadorUp();
+            const floorNum = obtienePisoEnPantalla();
+            solicitarElevadorUp(floorNum);
         })
     }
     if(btnRequestElevDown){
         btnRequestElevDown.addEventListener('click', function(){
-            solicitarElevadorDown();
+            const floorNum = obtienePisoEnPantalla();
+            solicitarElevadorDown(floorNum);
         })
     }
     if (btnAddFloor) { 
@@ -82,13 +86,13 @@ function loadPage(){
     }
     if (btnRemoveFloor) {
         btnRemoveFloor.addEventListener('click', function(){
-            removeFloor();
+            if(currentFloor < floorAmount || currentFloor == 1){
+                removeFloor();
+            }
         })
     }
-}
+};
 
-
-// Is callled by addFloor
 function addButton(floorNum){
     const button = document.createElement("button");
     button.className = "button"; 
@@ -101,7 +105,12 @@ function addButton(floorNum){
 
     const btnFront = document.createElement("span");
     btnFront.className = "front front-round";
-    btnFront.innerHTML = `${floorNum}`;    
+    btnFront.innerHTML = `${floorNum}`;
+    
+    
+    button.addEventListener("click", function(){
+        llegarPisoSeleccionado(floorNum);
+    });
     
     button.appendChild(btnShadow);
     button.appendChild(btnEdge);
@@ -109,7 +118,7 @@ function addButton(floorNum){
 
     floorButtonContainer.appendChild(button);
     floorButtonList.unshift(button);
-}
+};
 
 function addFloor(){      
     if(floorCount>=maxFloors){
@@ -142,7 +151,6 @@ function addFloor(){
     rightDoor.className = "puerta puerta-der";
     rightDoor.style.top = `${130}px`;
     
-    //Número de piso
     const floorNumber = document.createElement("span");
     floorNumber.innerHTML = `P${floorCount}`;
     floorNumber.className = "floor-number";
@@ -176,21 +184,20 @@ function removeFloor() {
     } else {
         console.log("No floors to remove");
     }
-}
+};
 
 function removeButton() {
     if (floorButtonList.length > 0) {
         const removedButton = floorButtonList.shift();        
         removedButton.remove();                    
     }
-}
+};
 
 function updateFloorNum(){    
     for (let i = floorCount; i>0; i--) {
         floorList[i-1].childNodes[4].innerHTML = `P${i}`;
       }
-}
-
+};
 
 function moverPuertasDer(puerta) {        
     const posicionActual = parseInt(getComputedStyle(puerta).left);
@@ -202,30 +209,13 @@ function moverPuertasIzq(puerta) {
     puerta.style.left = `${posicionActual - pasoDeMovimiento}px`;
 };
 
-function abrirPuertas(){
-    if (isDoorMoving == 0 && isClosed == 1){
-        const index = y/850;
-        console.log(index, y);
-        const floor = floorList[(floorCount-1) - Math.floor(y/850)];
-        const leftDoor = floor.childNodes[2];
-        const rightDoor = floor.childNodes[3];
-        isDoorMoving = 1;        
-        moverPuertasDer(rightDoor);
-        moverPuertasIzq(leftDoor);
-        setTimeout(function() {
-            isClosed = 0;
-            isDoorMoving = 0;
-        }, 1000);
-    }
-};
-
-function cerrarPuertas(){
+function cerrarPuertas(pisoDeseado){
     if (isDoorMoving == 0 && isClosed == 0){
-        const index = y/850;
-        console.log(index, y);
-        const floor = floorList[(floorCount-1) - Math.floor(y/850)];
-        const leftDoor = floor.childNodes[2];
-        const rightDoor = floor.childNodes[3];
+        const floorIndex = pisoDeseado - 1;
+        const floor = floorList[floorIndex];
+        if (!floor) return;
+        const leftDoor = floor.querySelector('.puerta-izq');
+        const rightDoor = floor.querySelector('.puerta-der');
         isDoorMoving = 1;
         moverPuertasDer(leftDoor);
         moverPuertasIzq(rightDoor);
@@ -236,92 +226,103 @@ function cerrarPuertas(){
     }
 };
 
+function abrirPuertas(pisoDeseado){
+    if (isDoorMoving == 0 && isClosed == 1){
+        const floorIndex = pisoDeseado - 1;
+        const floor = floorList[floorIndex];
+        if (!floor) return;
+        const leftDoor = floor.querySelector('.puerta-izq');
+        const rightDoor = floor.querySelector('.puerta-der');
+        isDoorMoving = 1;        
+        moverPuertasDer(rightDoor);
+        moverPuertasIzq(leftDoor);
+        setTimeout(function() {
+            isClosed = 0;
+            isDoorMoving = 0;
+        }, 1000);
+    }
+};
+
+function obtienePisoEnPantalla(){
+    return (floorCount) - Math.floor(y/850);
+};
+
+
 function subebajaElevador(piso){
     isElevMoving = 1;
     setTimeout(function() {
         elevScreen.textContent = "P" + piso;
         isElevMoving = 0;
-        abrirPuertas();
+        abrirPuertas(piso);
         setTimeout(function() {
-            cerrarPuertas();
-        }, 2000);
-    }, 1500);
+            cerrarPuertas(piso);
+        }, 3000);
+    }, 2000);
 };
 
-//Función que mueve el elevador al piso seleccionado en el panel interno
 function llegarPisoSeleccionado(piso){
     if (isClosed == 0 && isDoorMoving == 0 && isElevMoving == 0){
-        cerrarPuertas();
+        cerrarPuertas(currentFloor);
         setTimeout(function() {
             subebajaElevador(piso);
         }, 1000);
+        currentFloor = piso;
     }
     else if (isClosed == 1 && isDoorMoving == 0 && isElevMoving == 0){
         subebajaElevador(piso);
+        currentFloor = piso;
     }
 };
 
-function solicitarElevadorUp(){
+function solicitarElevadorUp(pisoDeseado){
     if(floorAmount > 0){
-        const index = y/850;
-        console.log(index, y);
-        const floor = floorList[(floorCount-1) - Math.floor(y/850)];
-        const floorNumberNode = floor.childNodes[4];
-        if (floorNumberNode && floorNumberNode.tagName === 'SPAN') {
-            const floorNumberText = floorNumberNode.textContent.trim();
-            const floorNumber = floorNumberText.replace('P', '');
-            if(floorNumber == floorAmount){
-                console.log("Piso Máximo. No se puede subir más");
+        const floorNumber = pisoDeseado;
+        if(floorNumber == floorAmount){
+            console.log("Piso Máximo. No se puede subir más");
+        } else{
+            if(floorNumber == currentFloor){
+                abrirPuertas(floorNumber);
+                setTimeout(function() {
+                    cerrarPuertas(floorNumber);
+                }, 2000);
             } else{
-                if(floorNumber == currentFloor){
-                    abrirPuertas();
+                if(currentFloor > floorNumber){
+                    console.log("Bajando");
+                    currentFloor = floorNumber;
+                    subebajaElevador(floorNumber);
+                    
                 } else{
-                    if(currentFloor > floorNumber){
-                        console.log("Bajando");
-                        currentFloor = floorNumber;
-                        subebajaElevador(floorNumber);
-                        
-                    } else{
-                        console.log("Subiendo");
-                        currentFloor = floorNumber;
-                        subebajaElevador(floorNumber);
-                    }
+                    console.log("Subiendo");
+                    currentFloor = floorNumber;
+                    subebajaElevador(floorNumber);
                 }
             }
-        } else{
-            console.log('No se encontró el nodo del número de piso o no es un elemento <span>');
         }
     }
 };
 
-function solicitarElevadorDown(){
+function solicitarElevadorDown(pisoDeseado){
     if(floorAmount > 0){
-        const index = y/850;
-        console.log(index, y);
-        const floor = floorList[(floorCount-1) - Math.floor(y/850)];
-        const floorNumberNode = floor.childNodes[4];
-        if (floorNumberNode && floorNumberNode.tagName === 'SPAN') {
-            const floorNumberText = floorNumberNode.textContent.trim();
-            const floorNumber = floorNumberText.replace('P', '');
-            if(floorNumber == 1){
-                console.log("Piso Mínimo. No se puede bajar más");
+        const floorNumber = pisoDeseado;
+        if(floorNumber == 1){
+            console.log("Piso Mínimo. No se puede bajar más");
+        } else{
+            if(floorNumber == currentFloor){
+                abrirPuertas(floorNumber);
+                setTimeout(function() {
+                    cerrarPuertas(floorNumber);
+                }, 2000);
             } else{
-                if(floorNumber == currentFloor){
-                    abrirPuertas();
+                if(currentFloor > floorNumber){
+                    console.log("Bajando");
+                    currentFloor = floorNumber;
+                    subebajaElevador(floorNumber);
                 } else{
-                    if(currentFloor > floorNumber){
-                        console.log("Bajando");
-                        currentFloor = floorNumber;
-                        subebajaElevador(floorNumber);
-                    } else{
-                        console.log("Subiendo");
-                        currentFloor = floorNumber;
-                        subebajaElevador(floorNumber);
-                    }
+                    console.log("Subiendo");
+                    currentFloor = floorNumber;
+                    subebajaElevador(floorNumber);
                 }
             }
-        } else{
-            console.log('No se encontró el nodo del número de piso o no es un elemento <span>');
         }
     }
 };
@@ -337,4 +338,3 @@ document.addEventListener("scroll", (event)=>{
     x = event.clientX;   
     y = event.pageY; 
 });
-
