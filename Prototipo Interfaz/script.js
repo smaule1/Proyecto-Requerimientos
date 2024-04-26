@@ -172,18 +172,16 @@ function addFloor(){
     elevatorContainer.style.height = `${currentTop}px`; 
     addButton(floorCount);
     updateFloorNum();
-    console.log(y);
-    //console.log(floorCount);
 };
 
 function removeFloor() {
     if (floorList.length > 0) {
         const removedFloor = floorList.shift();
+        floorCount--;
         removedFloor.remove();
         currentTop -= 850;
         elevatorContainer.style.height = `${currentTop}px`;
         updateFloorNum();
-        console.log(y);
     } else {
         console.log("No floors to remove");
     }
@@ -191,7 +189,6 @@ function removeFloor() {
 
 function updateFloorNum(){    
     for (let i = floorCount; i>0; i--) {
-        console.log(i);
         floorList[i-1].childNodes[4].innerHTML = `P${i}`;
       }
 }
