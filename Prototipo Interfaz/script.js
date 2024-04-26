@@ -58,12 +58,15 @@ function loadPage(){
     if (btnCerrar) { //Cierra ambas puertas manualmente
         btnCerrar.addEventListener('click', function() {
             const floorNum = obtienePisoEnPantalla();
+            if(floorNum!=currentFloor) return;
             cerrarPuertas(floorNum);
         });
       }
     if (btnAbrir) { //Abre ambas puertas manualmente
         btnAbrir.addEventListener('click', function(){
             const floorNum = obtienePisoEnPantalla();
+            console.log(floorNum, currentFloor);
+            if(floorNum!=currentFloor) return;
             abrirPuertas(floorNum);
         })
     }
