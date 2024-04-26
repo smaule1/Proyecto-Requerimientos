@@ -217,7 +217,7 @@ function moverPuertasIzq(puerta) {
 function abrirPuertas(){
     const index = y/850;
     console.log(index, y);
-    const floor = floorList[Math.floor(y/850)];
+    const floor = floorList[(floorCount-1) - Math.floor(y/850)];
     const leftDoor = floor.childNodes[2];
     const rightDoor = floor.childNodes[3];
     isDoorMoving = 1;        
@@ -232,7 +232,7 @@ function abrirPuertas(){
 function cerrarPuertas(){
     const index = y/850;
     console.log(index, y);
-    const floor = floorList[Math.floor(y/850)];
+    const floor = floorList[(floorCount-1) - Math.floor(y/850)];
     const leftDoor = floor.childNodes[2];
     const rightDoor = floor.childNodes[3];
     isDoorMoving = 1;
