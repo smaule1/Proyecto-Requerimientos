@@ -66,6 +66,18 @@ body{
     left: 500px;
 }
 
+.floor-number {
+    position: absolute;
+    left: 380px;
+    color: #ffffff;
+    padding: 5px 10px;
+    z-index: 3;
+    background-color: rgb(80, 79, 79);
+    padding-block: 1vh;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 32px;
+}
 .puerta {
     position: absolute;    
     background-color: rgb(78, 78, 78);
@@ -73,10 +85,10 @@ body{
     z-index: 2;
 }
 .puerta-izq{    
-    left: 330px;
+    left: 500px;
 }
 .puerta-der{    
-    left: 840px;
+    left: 670px;
 }
 .base{
     position: absolute;
@@ -283,10 +295,11 @@ body{
     grid-column: span 2;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    row-gap: 60px;
+    row-gap: 40px;
     column-gap: 40px;
     align-items: center;
     justify-items: center;
+    margin-block: 10px;
 }
 
 .button-sos{
