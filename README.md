@@ -25,4 +25,9 @@ TODO:
   - [ ] Panel Elevador
     - [ ] Personas
     - [ ] El Elevador
-  - [ ] Definir Colores 
+  - [ ] Definir Colores
+  - [ ] Simular Subir/Bajar Ascensor
+  - [ ] Simular Botón SOS (Emergencia y Outage)
+  - [ ] Cerrar/Abrir Puertas
+  - [ ] Simular Llamar Ascensor
+  - [ ] Simular Añadir/Eliminar Usuario
