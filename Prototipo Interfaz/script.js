@@ -156,7 +156,7 @@ function addFloor(){
     
     //Número de piso
     const floorNumber = document.createElement("span");
-    floorNumber.textContent = `P${floorCount}`;
+    floorNumber.innerHTML = `P${floorCount}`;
     floorNumber.className = "floor-number";
     floorNumber.style.top = `${60}px`;
     
@@ -166,25 +166,34 @@ function addFloor(){
     elevator.appendChild(rightDoor);
     elevator.appendChild(floorNumber);
        
-    floorList.push(elevator);
+    floorList.unshift(elevator);
     elevatorContainer.appendChild(elevator);
     currentTop += 850;
     elevatorContainer.style.height = `${currentTop}px`; 
     addButton(floorCount);
+    updateFloorNum();
     console.log(y);
-    console.log(floorCount);
+    //console.log(floorCount);
 };
 
 function removeFloor() {
     if (floorList.length > 0) {
-        const removedFloor = floorList.pop();
+        const removedFloor = floorList.shift();
         removedFloor.remove();
         currentTop -= 850;
         elevatorContainer.style.height = `${currentTop}px`;
+        updateFloorNum();
         console.log(y);
     } else {
         console.log("No floors to remove");
     }
+}
+
+function updateFloorNum(){    
+    for (let i = floorCount; i>0; i--) {
+        console.log(i);
+        floorList[i-1].childNodes[4].innerHTML = `P${i}`;
+      }
 }
 
 
