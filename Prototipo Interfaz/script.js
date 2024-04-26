@@ -25,6 +25,7 @@ let isClosed = 1; //0 abierta, 1 cerrada
 let isDoorMoving = 0; //0 quieta, 1 moviendo
 let isElevMoving = 0; //0 quieto, 1 moviendo
 let floorAmount = 0; //Inicia en 0, se incrementa conforme se añaden pisos
+let currentFloor = 1; //Inicia en 1, varía conforme se desarrolla la ejecución
 
 let x = 0;
 let y = 0;
@@ -54,20 +55,28 @@ function loadPage(){
     btnP2 = document.getElementById("btn_elev_2");
     btnP3 = document.getElementById("btn_elev_3");
     btnP4 = document.getElementById("btn_elev_4");
+    btnRequestElevDown = document.getElementById("btn_request_elev_down");
+    btnRequestElevUp = document.getElementById("btn_request_elev_up");
     elevScreen = document.getElementById("hd_elev_screen");
 
     if (btnCerrar) { //Cierra ambas puertas manualmente
         btnCerrar.addEventListener('click', function() {
-            if (isDoorMoving == 0 && isClosed == 0){
-                cerrarPuertas();
-            }
+            cerrarPuertas();
         });
       }
     if (btnAbrir) { //Abre ambas puertas manualmente
         btnAbrir.addEventListener('click', function(){
-            if (isDoorMoving == 0 && isClosed == 1){
-                abrirPuertas();
-            }
+            abrirPuertas();
+        })
+    }
+    if(btnRequestElevUp){
+        btnRequestElevUp.addEventListener('click', function(){
+            solicitarElevadorUp();
+        })
+    }
+    if(btnRequestElevDown){
+        btnRequestElevDown.addEventListener('click', function(){
+            solicitarElevadorDown();
         })
     }
     if (btnP1) { //Selecciona el piso 1
@@ -96,8 +105,11 @@ function loadPage(){
             addFloor(floorAmount);
         })
     }
-    if (btnRemoveFloor) { 
-        btnRemoveFloor.addEventListener('click', removeFloor)
+    if (btnRemoveFloor) {
+        btnRemoveFloor.addEventListener('click', function(){
+            floorAmount -= 1;
+            removeFloor();
+        })
     }
 }
 
@@ -215,33 +227,37 @@ function moverPuertasIzq(puerta) {
 };
 
 function abrirPuertas(){
-    const index = y/850;
-    console.log(index, y);
-    const floor = floorList[(floorCount-1) - Math.floor(y/850)];
-    const leftDoor = floor.childNodes[2];
-    const rightDoor = floor.childNodes[3];
-    isDoorMoving = 1;        
-    moverPuertasDer(rightDoor);
-    moverPuertasIzq(leftDoor);
-    setTimeout(function() {
-        isClosed = 0;
-        isDoorMoving = 0;
-    }, 1000);
+    if (isDoorMoving == 0 && isClosed == 1){
+        const index = y/850;
+        console.log(index, y);
+        const floor = floorList[(floorCount-1) - Math.floor(y/850)];
+        const leftDoor = floor.childNodes[2];
+        const rightDoor = floor.childNodes[3];
+        isDoorMoving = 1;        
+        moverPuertasDer(rightDoor);
+        moverPuertasIzq(leftDoor);
+        setTimeout(function() {
+            isClosed = 0;
+            isDoorMoving = 0;
+        }, 1000);
+    }
 };
 
 function cerrarPuertas(){
-    const index = y/850;
-    console.log(index, y);
-    const floor = floorList[(floorCount-1) - Math.floor(y/850)];
-    const leftDoor = floor.childNodes[2];
-    const rightDoor = floor.childNodes[3];
-    isDoorMoving = 1;
-    moverPuertasDer(leftDoor);
-    moverPuertasIzq(rightDoor);
-    setTimeout(function() {
-        isClosed = 1;
-        isDoorMoving = 0;
-    }, 1000);
+    if (isDoorMoving == 0 && isClosed == 0){
+        const index = y/850;
+        console.log(index, y);
+        const floor = floorList[(floorCount-1) - Math.floor(y/850)];
+        const leftDoor = floor.childNodes[2];
+        const rightDoor = floor.childNodes[3];
+        isDoorMoving = 1;
+        moverPuertasDer(leftDoor);
+        moverPuertasIzq(rightDoor);
+        setTimeout(function() {
+            isClosed = 1;
+            isDoorMoving = 0;
+        }, 1000);
+    }
 };
 
 function subebajaElevador(piso){
@@ -263,6 +279,62 @@ function llegarPisoSeleccionado(piso){
     }
     else if (isClosed == 1 && isDoorMoving == 0 && isElevMoving == 0){
         subebajaElevador(piso);
+    }
+};
+
+function solicitarElevadorUp(){
+    if(floorAmount > 0){
+        const index = y/850;
+        console.log(index, y);
+        const floor = floorList[(floorCount-1) - Math.floor(y/850)];
+        const floorNumberNode = floor.childNodes[4];
+        if (floorNumberNode && floorNumberNode.tagName === 'SPAN') {
+            const floorNumberText = floorNumberNode.textContent.trim();
+            const floorNumber = floorNumberText.replace('P', '');
+            if(floorNumber == floorAmount){
+                console.log("Piso Máximo. No se puede subir más");
+            } else{
+                if(floorNumber == currentFloor){
+                    abrirPuertas();
+                } else{
+                    if(currentFloor > floorNumber){
+                        console.log("Bajando");
+                    } else{
+                        console.log("Subiendo");
+                    }
+                }
+            }
+        } else{
+            console.log('No se encontró el nodo del número de piso o no es un elemento <span>');
+        }
+    }
+};
+
+function solicitarElevadorDown(){
+    if(floorAmount > 0){
+        const index = y/850;
+        console.log(index, y);
+        const floor = floorList[(floorCount-1) - Math.floor(y/850)];
+        const floorNumberNode = floor.childNodes[4];
+        if (floorNumberNode && floorNumberNode.tagName === 'SPAN') {
+            const floorNumberText = floorNumberNode.textContent.trim();
+            const floorNumber = floorNumberText.replace('P', '');
+            if(floorNumber == 1){
+                console.log("Piso Mínimo. No se puede bajar más");
+            } else{
+                if(floorNumber == currentFloor){
+                    abrirPuertas();
+                } else{
+                    if(currentFloor > floorNumber){
+                        console.log("Bajando");
+                    } else{
+                        console.log("Subiendo");
+                    }
+                }
+            }
+        } else{
+            console.log('No se encontró el nodo del número de piso o no es un elemento <span>');
+        }
     }
 };
 
