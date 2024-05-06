@@ -28,6 +28,7 @@ let isDoorMoving = 0; //0 quieta, 1 moviendo
 let isElevMoving = 0; //0 quieto, 1 moviendo
 let floorAmount = 0; //Inicia en 0, se incrementa conforme se añaden pisos
 let currentFloor = 1; //Inicia en 1, varía conforme se desarrolla la ejecución
+let lastFloor = 1; //Inicia en 1, guarda el valor de currentFloor antes de que este cambie
 
 let x = 0;
 let y = 0;
@@ -296,17 +297,26 @@ function subebajaElevador(piso){
             cerrarPuertas(piso);
         }, 3000);
     }, 2000);
+    if (lastFloor < piso) {
+        elevScreen.textContent = "▲P" + lastFloor;
+    } else if (lastFloor > piso){
+        elevScreen.textContent = "▼P" + lastFloor;
+    } else {
+        elevScreen.textContent = "P" + piso;
+    }
 };
 
 function llegarPisoSeleccionado(piso){
     if (isClosed == 0 && isDoorMoving == 0 && isElevMoving == 0){
         cerrarPuertas(currentFloor);
+        lastFloor = currentFloor;
         setTimeout(function() {
             subebajaElevador(piso);
         }, 1000);
         currentFloor = piso;
     }
     else if (isClosed == 1 && isDoorMoving == 0 && isElevMoving == 0){
+        lastFloor = currentFloor;
         subebajaElevador(piso);
         currentFloor = piso;
     }
@@ -326,11 +336,13 @@ function solicitarElevadorUp(pisoDeseado){
             } else{
                 if(currentFloor > floorNumber){
                     console.log("Bajando");
+                    lastFloor = currentFloor;
                     currentFloor = floorNumber;
                     subebajaElevador(floorNumber);
                     
                 } else{
                     console.log("Subiendo");
+                    lastFloor = currentFloor;
                     currentFloor = floorNumber;
                     subebajaElevador(floorNumber);
                 }
@@ -353,10 +365,12 @@ function solicitarElevadorDown(pisoDeseado){
             } else{
                 if(currentFloor > floorNumber){
                     console.log("Bajando");
+                    lastFloor = currentFloor;
                     currentFloor = floorNumber;
                     subebajaElevador(floorNumber);
                 } else{
                     console.log("Subiendo");
+                    lastFloor = currentFloor;
                     currentFloor = floorNumber;
                     subebajaElevador(floorNumber);
                 }
