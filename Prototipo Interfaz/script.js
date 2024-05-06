@@ -290,7 +290,7 @@ function obtienePisoEnPantalla(){
 function subebajaElevador(piso){
     isElevMoving = 1;
     setTimeout(function() {
-        elevScreen.textContent = "P" + piso;
+        elevScreen.textContent = "◇P" + piso;
         isElevMoving = 0;
         abrirPuertas(piso);
         setTimeout(function() {
@@ -298,11 +298,11 @@ function subebajaElevador(piso){
         }, 3000);
     }, 2000);
     if (lastFloor < piso) {
-        elevScreen.textContent = "▲P" + lastFloor;
+        elevScreen.textContent = "⬘P" + lastFloor;
     } else if (lastFloor > piso){
-        elevScreen.textContent = "▼P" + lastFloor;
+        elevScreen.textContent = "⬙P" + lastFloor;
     } else {
-        elevScreen.textContent = "P" + piso;
+        elevScreen.textContent = "◇P" + piso;
     }
 };
 
