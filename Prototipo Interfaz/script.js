@@ -21,6 +21,8 @@ let currentTop = 0;
 
 
 let pasoDeMovimiento = 170;
+let sosEmergency = false; 
+let sosColor = false;
 let isClosed = 1; //0 abierta, 1 cerrada
 let isDoorMoving = 0; //0 quieta, 1 moviendo
 let isElevMoving = 0; //0 quieto, 1 moviendo
@@ -53,45 +55,80 @@ function loadPage(){
     btnAbrir = document.getElementById('btn_elev_abrir');
     btnRequestElevDown = document.getElementById("btn_request_elev_down");
     btnRequestElevUp = document.getElementById("btn_request_elev_up");
+    btnSOS = document.getElementById("btn_elev_sos");
     elevScreen = document.getElementById("hd_elev_screen");
 
     if (btnCerrar) { //Cierra ambas puertas manualmente
         btnCerrar.addEventListener('click', function() {
+            if(sosEmergency) return;
             const floorNum = obtienePisoEnPantalla();
             cerrarPuertas(floorNum);
         });
       }
     if (btnAbrir) { //Abre ambas puertas manualmente
         btnAbrir.addEventListener('click', function(){
+            if(sosEmergency) return;
             const floorNum = obtienePisoEnPantalla();
             abrirPuertas(floorNum);
         })
     }
     if(btnRequestElevUp){
         btnRequestElevUp.addEventListener('click', function(){
+            if(sosEmergency) return;
             const floorNum = obtienePisoEnPantalla();
             solicitarElevadorUp(floorNum);
         })
     }
     if(btnRequestElevDown){
         btnRequestElevDown.addEventListener('click', function(){
+            if(sosEmergency) return;
             const floorNum = obtienePisoEnPantalla();
             solicitarElevadorDown(floorNum);
         })
     }
     if (btnAddFloor) { 
         btnAddFloor.addEventListener('click', function(){
+            if(sosEmergency) return;
             addFloor(floorAmount);
         })
     }
     if (btnRemoveFloor) {
         btnRemoveFloor.addEventListener('click', function(){
+            if(sosEmergency) return;
             if(currentFloor < floorAmount || currentFloor == 1){
                 removeFloor();
             }
         })
     }
+    if (btnSOS) {        
+        btnSOS.addEventListener('click', function(){            
+            if(sosEmergency) return;
+            sosEvent();            
+        })
+    }
 };
+
+ 
+
+function sosEvent(){
+    sosEmergency = true;
+    elevScreen.textContent = "SOS";
+    elevScreen.style.color = "#ff0000";
+
+    for(let i = 1; i<=14; i++){
+        let color = (i%2==0) ? "#ff0000" : "#ff6000"; 
+        setTimeout(function() {    
+            elevScreen.style.color = color;
+            console.log(color);
+        }, 500*i);
+    }    
+    setTimeout(function() {
+        sosEmergency = false;        
+        elevScreen.style.color = "#9acd32";        
+        elevScreen.textContent = "P" + currentFloor;
+    }, 7000);
+}
+
 
 function addButton(floorNum){
     const button = document.createElement("button");
@@ -109,6 +146,7 @@ function addButton(floorNum){
     
     
     button.addEventListener("click", function(){
+        if(sosEmergency) return;
         llegarPisoSeleccionado(floorNum);
     });
     
