@@ -210,7 +210,7 @@ function moverPuertasIzq(puerta) {
 };
 
 function cerrarPuertas(pisoDeseado){
-    if (isDoorMoving == 0 && isClosed == 0){
+    if (isDoorMoving == 0 && isClosed == 0 && currentFloor==pisoDeseado){
         const floorIndex = pisoDeseado - 1;
         const floor = floorList[floorIndex];
         if (!floor) return;
@@ -227,7 +227,7 @@ function cerrarPuertas(pisoDeseado){
 };
 
 function abrirPuertas(pisoDeseado){
-    if (isDoorMoving == 0 && isClosed == 1){
+    if (isDoorMoving == 0 && isClosed == 1 && currentFloor==pisoDeseado){
         const floorIndex = pisoDeseado - 1;
         const floor = floorList[floorIndex];
         if (!floor) return;
